@@ -1,9 +1,9 @@
 import folium
-from folium.features import Icon
+from folium.plugins import BeautifyIcon
 from folium.plugins import MarkerCluster
 import webbrowser
 import pandas as pd
-from icon_size import iconSize
+from meteor_icon import create_meteor_icon
 from description import describe
 
 
@@ -27,11 +27,10 @@ n = len(df)
 for i in range(n):
     row = df.iloc[i]
     coordinates = row['geolocation']
-    # icon_size = row['mass']/100
-    ics = iconSize(row['mass'])
+    # icon = folium.Icon(icon='meteor', color="lightred", icon_color="black", prefix='fa')
     lat, lon = coordinates.values()
-    icon = folium.Icon(icon='meteor', color="lightred", icon_color="black", prefix='fa')
-    marker = folium.Marker(location=(lat, lon), icon=icon, icon_size=(ics, ics))
+    icon = create_meteor_icon(row['mass'], "black")
+    marker = folium.Marker(location=(lat, lon), icon=icon)
     marker.add_child(folium.Popup(describe(row), max_width=300))
     mc.add_child(marker)
 m.add_child(mc)
