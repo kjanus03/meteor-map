@@ -1,23 +1,6 @@
-from math import log10, ceil, isnan
-from IPython.core.display import HTML
-from folium import DivIcon
-
-def iconSize(mass):
-    if isnan(mass):
-        result = 3
-    else:
-        result = 3*ceil(log10(mass))
-    return result
-
-def create_meteor_icon(mass, color):
-    size = iconSize(mass)
-    print(size)
-    html = f"""
-            <div style="width:{size}px; height:{size}px">
-            <i class="fas fa-meteor" style="color:{color}"></i>
-            </div>
-        """
-
-    return DivIcon(html=html)
+import folium
 
 
+def create_meteor_icon(color, icon_color):
+    icon = folium.Icon(icon='meteor', color=color, icon_color=icon_color, prefix='fa')
+    return icon
