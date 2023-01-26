@@ -24,11 +24,14 @@ mc = MarkerCluster(max_cluster_radius=90, show_coverage_on_hover=True, disableCl
 # Reading from the meteorite_data.json and ignoring rows without the geolocation
 df = pd.DataFrame(pd.read_json("meteorite_data.json"))
 df = df[df['geolocation'].notna()]
+
 # Ignoring the rows without the date and correcting it
 df = df[df['year'].notna()]
 df['year'] = df['year'].apply(lambda x: x[:4])
+
 # Setting the reccommended class column type to string
 df['recclass'] = df['recclass'].astype("string")
+
 # Plotting each coordinate
 n = len(df)
 for i in range(n):
@@ -40,8 +43,8 @@ for i in range(n):
     marker.add_child(folium.Popup(describe(row), max_width=300))
     mc.add_child(marker)
 m.add_child(mc)
-# Save the map object to an HTML file
 
+# Save the map object to an HTML file
 m.save('my_map.html')
 
 # Open the HTML file in a web browser
