@@ -6,7 +6,7 @@ from description import describe
 
 
 # Creates and saves an html file with the map
-def create_map():
+def create_map() -> folium.Map:
     # Create a map object centered on the point of interest
     m = folium.Map(location=[20, 0],
                    zoom_start=2,
@@ -47,7 +47,10 @@ def create_map():
     m.add_child(mc)
 
     # Save the map object to an HTML file
-    m.save("meteor_map.html")
+    m.save("C:\\Users\\adamj\\OneDrive\\Pulpit\\JavaProjects\\meteor-map\\meteorapp\\templates\\meteor_map.html")
+
+    # Return the map object
+    return m
 
 
 if __name__ == "__main__":
